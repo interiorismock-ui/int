@@ -1102,6 +1102,12 @@ footer li svg{width:18px;height:18px}
       <h3 class="a-title">Guardar en la nube</h3>
       <div class="a-help"><i data-lucide="lightbulb"></i>Sin esto, tus cambios solo se ven en este equipo. Al conectar GitHub, cada cambio se publica y lo ve todo el mundo, desde cualquier celular o compu.</div>
       <div class="a-status" id="ghStatus"><span class="dot"></span><span id="ghStatusText">Todavía no conectado</span></div>
+      <div id="ghLinkBox" style="display:none;background:#fff;border:1px solid #EAE2D6;border-radius:16px;padding:16px;margin-bottom:18px">
+        <b style="display:block;margin-bottom:4px">📱 Tu página publicada</b>
+        <small style="display:block;color:#7b7268;font-size:14px;margin-bottom:10px">Abrí siempre esta dirección, en la compu y en el celular. Guardala en favoritos.</small>
+        <a id="ghLink" target="_blank" rel="noopener" style="display:block;font-weight:700;color:#B5715A;word-break:break-all;margin-bottom:12px"></a>
+        <button class="a-btn soft" id="ghCopyLink" type="button"><i data-lucide="copy"></i>Copiar la dirección</button>
+      </div>
       <label class="a-field"><span>Usuario de GitHub</span><small>El dueño del repositorio. Ejemplo: carlakassburg</small><input id="ghOwner" autocapitalize="off" autocomplete="off" spellcheck="false"></label>
       <label class="a-field"><span>Nombre del repositorio</span><small>Donde está guardada la página. Ejemplo: ck-interiorismo</small><input id="ghRepo" autocapitalize="off" autocomplete="off" spellcheck="false"></label>
       <label class="a-field"><span>Rama</span><small>Casi siempre es “main”. Si no sabés, dejalo así.</small><input id="ghBranch" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="main"></label>
@@ -1270,17 +1276,20 @@ function save(silent){
   }
 }
 /* Al abrir la página: si hay datos publicados en la nube (data.json), se usan esos */
+let remoteStatus = 'pending';   // 'ok' = esta página está conectada a la nube · 'none' = es una copia suelta
 async function loadRemote(){
   try{
     const r = await fetch('data.json?v=' + Date.now(), {cache:'no-store'});
-    if(!r.ok) return;
+    if(!r.ok){ remoteStatus = 'none'; return; }
+    remoteStatus = 'ok';
     const remote = normalize(await r.json());
     if(isDirty() && state.updatedAt > remote.updatedAt) return;  // Carla tiene cambios nuevos sin publicar
     state = remote;
     try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
     setDirty(false); renderAll(false);
     if($('#admin').classList.contains('open')) fillAdmin();
-  }catch(e){ /* sin nube: se usa lo local */ }
+  }catch(e){ remoteStatus = 'none'; /* sin nube: se usa lo local */ }
+  finally{ if($('#admin').classList.contains('open')) renderWarns(); }
 }
 
 /* =========================================================
@@ -1736,8 +1745,18 @@ function fillAdmin(){
   $('#prev-carla img').src = IM(state.images.carla || 'images/carla.jpg');
   renderPList(); renderTList(); fillGitHub(); renderWarns(); icons();
 }
+/* Dirección de la página publicada en GitHub Pages */
+function pagesUrl(){
+  const c = state.cloud || {}; if(!c.owner || !c.repo) return '';
+  const o = c.owner.toLowerCase();
+  return c.repo.toLowerCase() === o + '.github.io' ? `https://${o}.github.io/` : `https://${o}.github.io/${c.repo}/`;
+}
+const onPublishedPage = () => { const u = pagesUrl(); return !!u && location.href.toLowerCase().startsWith(u.toLowerCase()); };
 function renderWarns(){
   let h = '';
+  const url = pagesUrl();
+  if(url && !onPublishedPage()) h += `<div class="a-warn" style="background:#FBEAE5;border-color:#EBC1B5;color:#7c2f1f"><i data-lucide="triangle-alert" style="color:#B04A35"></i><div><b>Ojo: esta es una copia, no tu página publicada.</b> Lo que cambies acá no lo ve nadie más. Entrá siempre desde:<a href="${esc(url)}" target="_blank" rel="noopener" style="display:block;margin-top:8px;font-weight:700;color:#B04A35;word-break:break-all">${esc(url)}</a></div></div>`;
+  else if(!url && remoteStatus === 'none') h += `<div class="a-warn" style="background:#FBEAE5;border-color:#EBC1B5;color:#7c2f1f"><i data-lucide="triangle-alert" style="color:#B04A35"></i><div><b>Esta copia no está conectada a tu página en internet.</b> Si ya conectaste la nube en otro equipo, abrí tu página publicada (la dirección termina en <b>github.io</b>) y entrá desde ahí: la llave y tu contraseña se cargan solas.</div></div>`;
   if(waNumber()==='5490000000000' || waNumber().length < 10) h += `<div class="a-warn"><i data-lucide="phone"></i><div><b>Falta tu WhatsApp real.</b> Así te llegan las consultas.<button data-go="datos">Cargar mi número</button></div></div>`;
   if(!ghConfigured()) h += `<div class="a-warn" style="background:#EEF3EA;border-color:#D3E0CA;color:#45603a"><i data-lucide="cloud" style="color:#6FA15A"></i><div><b>Tus cambios solo se ven en este equipo.</b> Conectá la nube para que los vea todo el mundo.<button data-go="nube" style="color:#5E7F4E">Conectar la nube</button></div></div>`;
   $('#homeWarns').innerHTML = h; icons();
@@ -1830,6 +1849,8 @@ function fillGitHub(){
   if(ghConfigured()) ghStatus('ok', last ? `Conectado · último publicado: ${new Date(last).toLocaleString('es-AR',{dateStyle:'short',timeStyle:'short'})}` : 'Conectado ✓');
   else if(state.security.ghEnc) ghStatus('', 'La llave ya está guardada. Volvé a entrar con tu contraseña para activarla en este equipo.');
   else ghStatus('', 'Todavía no conectado');
+  const url = pagesUrl(); $('#ghLinkBox').style.display = url ? 'block' : 'none';
+  if(url){ $('#ghLink').href = url; $('#ghLink').textContent = url; }
   updatePubPill();
 }
 function updatePubPill(){ const p = $('#pubPill'); if(p) p.classList.toggle('show', isDirty() && ghConfigured()); }
@@ -1916,6 +1937,7 @@ $('#ghSave').onclick = async ()=>{
 };
 $('#ghAuto').onchange = ()=>{ state.cloud = {...state.cloud, auto:$('#ghAuto').checked}; save(); };
 $('#ghPublish').onclick = ()=>publish(false);
+$('#ghCopyLink').onclick = async ()=>{ try{ await navigator.clipboard.writeText(pagesUrl()); toast('¡Dirección copiada! Mandátela por WhatsApp y abrila en el celular.'); }catch(e){ toast('No se pudo copiar: mantené apretada la dirección para copiarla', true); } };
 $('#pubPill').onclick = ()=>publish(false);
 $('#ghForget').onclick = async ()=>{
   if(await askConfirm('¿Desconectar la nube?', 'Se borra la llave guardada, en todos tus equipos. Tu página publicada no se borra.', 'Sí, desconectar')){
