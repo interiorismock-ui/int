@@ -439,6 +439,25 @@ footer li svg{width:18px;height:18px}
 .pin-pad button:hover{background:#E6DCCD}
 .pin-pad button:active{transform:scale(.94)}
 .pin-hint{font-size:14px;color:#8a8076;margin-top:18px}
+.pw-wrap{position:relative;margin-bottom:14px}
+.pw-wrap input{width:100%;padding:18px 58px 18px 18px;border-radius:16px;border:1.5px solid #E2D8CA;font:inherit;font-size:18px;color:#2C2C2C;background:#fff;outline:none;transition:.25s}
+.pw-wrap input:focus{border-color:#B5715A;box-shadow:0 0 0 4px rgba(181,113,90,.15)}
+.pw-eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#7b7268}
+.pw-eye svg{width:22px;height:22px}
+.a-warn{background:#FCEFE3;border:1px solid #F0CDB4;color:#7a4a2e;border-radius:16px;padding:14px 16px;font-size:15px;display:flex;gap:12px;align-items:flex-start;margin:0 0 18px}
+.a-warn svg{width:22px;height:22px;flex:none;color:#C4703F;margin-top:1px}
+.a-warn button{display:block;margin-top:8px;font-weight:700;color:#B5715A;text-decoration:underline;font-size:15px}
+.a-sep{height:1px;background:#EAE2D6;margin:28px 0 22px}
+.a-status{display:flex;align-items:center;gap:10px;padding:14px 16px;border-radius:14px;background:#fff;border:1px solid #EAE2D6;font-size:15px;margin-bottom:16px}
+.a-status .dot{width:12px;height:12px;border-radius:50%;background:#C9BFB2;flex:none}
+.a-status.ok .dot{background:#6FA15A;box-shadow:0 0 0 4px rgba(111,161,90,.2)}
+.a-status.err .dot{background:#C0614B}
+.a-steps{margin:0 0 20px;padding-left:22px;font-size:15px;color:#5d564e;display:grid;gap:6px}
+.pub-pill{display:none;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#8a5a12;background:#FCEFC9;padding:6px 12px;border-radius:99px;margin-left:6px}
+.pub-pill.show{display:inline-flex}
+.pub-pill svg{width:14px;height:14px}
+.a-check{display:flex;gap:12px;align-items:center;font-size:17px;margin:4px 0 18px;cursor:pointer}
+.a-check input{width:24px;height:24px;accent-color:#B5715A;flex:none}
 
 .admin{visibility:hidden;position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);z-index:240;background:#FBF8F3;color:#2C2C2C;font-family:'DM Sans';font-size:18px;
   box-shadow:-30px 0 80px -20px rgba(0,0,0,.4);transform:translateX(105%);transition:transform .7s cubic-bezier(.7,0,.2,1),visibility 0s .7s;display:flex;flex-direction:column}
@@ -604,7 +623,7 @@ footer li svg{width:18px;height:18px}
       <path d="M68 60 C 58 52, 40 56, 40 74 C 40 92, 60 96, 68 86"/>
       <path d="M60 62 V96 M60 80 L80 62 M64 76 L82 96"/>
     </svg>
-    <span><b>CK Interiorismo</b><small>Carla Kassburg</small></span>
+    <span><b>CK Interiorismo</b><small id="brandName">Carla Kassburg</small></span>
   </a>
   <nav class="nav-links">
     <a href="#servicios">Servicios</a>
@@ -761,7 +780,7 @@ footer li svg{width:18px;height:18px}
       <span class="eyebrow reveal">Sobre mí</span>
       <h2 class="reveal" data-delay="1" id="aboutTitle"></h2>
       <p class="reveal" data-delay="2" id="aboutText"></p>
-      <div class="signature reveal" data-delay="3">Carla</div>
+      <div class="signature reveal" data-delay="3" id="signature">Carla</div>
       <a class="ig-strip reveal" data-delay="3" id="igStrip" target="_blank" rel="noopener">
         <span class="ig-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></span>
         <span><b id="igHandle">@ck.interiorismo</b><span>Más de 1.700 personas siguen su trabajo en Instagram</span></span>
@@ -890,6 +909,7 @@ footer li svg{width:18px;height:18px}
         <ul>
           <li><a id="footWa" target="_blank" rel="noopener"><i data-lucide="message-circle"></i><span id="footWaText">WhatsApp</span></a></li>
           <li><a id="footIg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg><span id="footIgText">@ck.interiorismo</span></a></li>
+          <li id="footMailLi"><a id="footMail"><i data-lucide="mail"></i><span id="footMailText"></span></a></li>
           <li><span style="display:inline-flex;gap:10px;align-items:center"><i data-lucide="map-pin" style="width:18px"></i><span id="footZone"></span></span></li>
         </ul>
       </div>
@@ -904,8 +924,8 @@ footer li svg{width:18px;height:18px}
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© <span id="year"></span> CK Interiorismo · Carla Kassburg</span>
-      <button class="carla-access" id="carlaAccess"><i data-lucide="lock"></i>Acceso Carla</button>
+      <span>© <span id="year"></span> CK Interiorismo · <span id="footName">Carla Kassburg</span></span>
+      <button class="carla-access" id="carlaAccess"><i data-lucide="lock"></i>Acceso</button>
     </div>
   </div>
 </footer>
@@ -937,12 +957,15 @@ footer li svg{width:18px;height:18px}
 <div class="pin-modal" id="pinModal" role="dialog" aria-modal="true" aria-label="Ingreso al panel">
   <div class="pin-card" id="pinCard">
     <div style="width:64px;height:64px;border-radius:50%;background:#F4E7DF;color:#B5715A;display:grid;place-items:center;margin:0 auto"><i data-lucide="key-round" style="width:28px;height:28px"></i></div>
-    <h3>¡Hola Carla!</h3>
-    <p>Ingresá tu clave de 4 números</p>
-    <div class="pin-dots" id="pinDots"><span></span><span></span><span></span><span></span></div>
-    <div class="pin-pad" id="pinPad"></div>
-    <div class="pin-hint">Clave de prueba: <b>1234</b></div>
-    <button id="pinCancel" style="margin-top:14px;color:#8a8076;font-size:15px;padding:8px">Cancelar</button>
+    <h3 id="pwHello">¡Hola!</h3>
+    <p>Escribí tu contraseña para entrar a tu panel</p>
+    <form id="pwForm" autocomplete="on">
+      <input type="text" name="username" value="carla" autocomplete="username" hidden>
+      <div class="pw-wrap"><input type="password" id="pwInput" autocomplete="current-password" placeholder="Tu contraseña" aria-label="Contraseña"><button type="button" class="pw-eye" data-eye="pwInput" aria-label="Mostrar contraseña"><i data-lucide="eye"></i></button></div>
+      <button type="submit" class="a-btn main" id="pwSubmit"><i data-lucide="log-in"></i>Entrar</button>
+    </form>
+    <div class="pin-hint" id="pwMsg">¿Te olvidaste la contraseña? Avisale a quien te armó la página.</div>
+    <button id="pinCancel" style="margin-top:10px;color:#8a8076;font-size:15px;padding:8px">Cancelar</button>
   </div>
 </div>
 
@@ -950,22 +973,25 @@ footer li svg{width:18px;height:18px}
 <aside class="admin" id="admin" aria-label="Panel de Carla">
   <div class="admin-head">
     <div class="av">CK</div>
-    <div><b>Tu panel</b><small><span class="saved-pill" id="savedPill"><i data-lucide="check"></i>Guardado</span></small></div>
+    <div><b>Tu panel</b><small><span class="saved-pill" id="savedPill"><i data-lucide="check"></i>Guardado</span><button class="pub-pill" id="pubPill"><i data-lucide="cloud-upload"></i>Sin publicar</button></small></div>
     <button class="admin-close" id="adminClose"><i data-lucide="eye"></i>Ver mi página</button>
   </div>
   <div class="admin-body">
 
     <!-- MENÚ PRINCIPAL -->
     <div class="a-view active" data-view="home">
-      <div class="a-hello">¡Hola Carla! 👋</div>
+      <div class="a-hello" id="aHello">¡Hola Carla! 👋</div>
       <p class="a-sub">¿Qué te gustaría cambiar hoy? Todo lo que hagas se guarda solo y se ve al instante.</p>
+      <div id="homeWarns"></div>
       <div class="a-tiles">
         <button class="a-tile" data-go="estilo"><span class="ic"><i data-lucide="palette"></i></span><b>Estilo de la página</b><span>Colores y look general</span></button>
         <button class="a-tile" data-go="textos"><span class="ic"><i data-lucide="type"></i></span><b>Mis textos</b><span>Bienvenida, WhatsApp y presentación</span></button>
         <button class="a-tile" data-go="proyectos"><span class="ic"><i data-lucide="images"></i></span><b>Mis proyectos</b><span>Agregar, destacar o borrar fotos</span></button>
         <button class="a-tile" data-go="fotos"><span class="ic"><i data-lucide="image"></i></span><b>Fotos principales</b><span>Portada y tu foto personal</span></button>
         <button class="a-tile" data-go="opiniones"><span class="ic"><i data-lucide="message-square-heart"></i></span><b>Opiniones</b><span>Lo que dicen tus clientes</span></button>
-        <button class="a-tile" data-go="ayuda"><span class="ic"><i data-lucide="life-buoy"></i></span><b>Ayuda</b><span>Restaurar o salir</span></button>
+        <button class="a-tile" data-go="datos"><span class="ic"><i data-lucide="user-cog"></i></span><b>Mis datos y contraseña</b><span>WhatsApp, Instagram, mail y clave</span></button>
+        <button class="a-tile" data-go="nube"><span class="ic"><i data-lucide="cloud"></i></span><b>Guardar en la nube</b><span>Que todos vean tus cambios (GitHub)</span></button>
+        <button class="a-tile" data-go="ayuda" style="grid-column:1/-1;min-height:auto;flex-direction:row;align-items:center"><span class="ic"><i data-lucide="life-buoy"></i></span><span><b style="display:block;color:#2C2C2C">Ayuda</b><span>Restaurar o salir</span></span></button>
       </div>
     </div>
 
@@ -984,9 +1010,6 @@ footer li svg{width:18px;height:18px}
       <div class="a-help"><i data-lucide="lightbulb"></i>Escribí y mirá la página: se actualiza mientras tipeás. Truco: poné una palabra entre asteriscos, *así*, para que aparezca en cursiva y de color.</div>
       <label class="a-field"><span>Frase de bienvenida</span><small>Es lo primero que ve la gente, en letras grandes.</small><input data-text="heroTitle"></label>
       <label class="a-field"><span>Texto debajo de la frase</span><small>Una o dos líneas contando qué hacés.</small><textarea data-text="heroSubtitle" style="min-height:90px"></textarea></label>
-      <label class="a-field"><span>Tu número de WhatsApp</span><small>Con código de país y sin espacios ni signos. Ejemplo: 5493511234567</small><input data-text="whatsapp" inputmode="numeric"></label>
-      <label class="a-field"><span>Tu usuario de Instagram</span><small>Sin la @. Ejemplo: ck.interiorismo</small><input data-text="instagram"></label>
-      <label class="a-field"><span>Zona donde trabajás</span><small>Aparece al pie de la página.</small><input data-text="zona"></label>
       <label class="a-field"><span>Título de tu presentación</span><small>Sección “Sobre mí”.</small><input data-text="aboutTitle"></label>
       <label class="a-field"><span>Tu presentación personal</span><small>Contá quién sos y cómo trabajás. Podés usar varios párrafos.</small><textarea data-text="aboutText" style="min-height:220px"></textarea></label>
       <button class="a-btn main" id="saveTexts"><i data-lucide="circle-check"></i>Guardar mis textos</button>
@@ -1050,6 +1073,57 @@ footer li svg{width:18px;height:18px}
       <div class="p-list" id="tList"></div>
     </div>
 
+    <!-- MIS DATOS Y CONTRASEÑA -->
+    <div class="a-view" data-view="datos">
+      <button class="a-back" data-go="home"><i data-lucide="arrow-left"></i>Volver al menú</button>
+      <h3 class="a-title">Mis datos</h3>
+      <div class="a-help"><i data-lucide="lightbulb"></i>Estos datos aparecen en tu página y en los botones de WhatsApp. Se actualizan mientras escribís.</div>
+      <label class="a-field"><span>Tu nombre</span><small>Como querés que aparezca en la página.</small><input data-text="nombre" autocomplete="name"></label>
+      <label class="a-field"><span>Tu número de WhatsApp</span><small>Con código de país, sin espacios ni signos. Ejemplo para Argentina: 5493511234567</small><input data-text="whatsapp" inputmode="numeric" autocomplete="tel"></label>
+      <label class="a-field"><span>Tu usuario de Instagram</span><small>Sin la @. Ejemplo: ck.interiorismo</small><input data-text="instagram"></label>
+      <label class="a-field"><span>Tu mail (opcional)</span><small>Si lo dejás vacío, no aparece.</small><input data-text="email" type="email" inputmode="email" autocomplete="email"></label>
+      <label class="a-field"><span>Zona donde trabajás</span><small>Ejemplo: Córdoba Capital y alrededores · También online</small><input data-text="zona"></label>
+      <button class="a-btn main" id="saveDatos"><i data-lucide="circle-check"></i>Guardar mis datos</button>
+
+      <div class="a-sep"></div>
+      <h3 class="a-title" style="font-size:30px">Cambiar contraseña</h3>
+      <div class="a-help"><i data-lucide="shield-check"></i>Mínimo 4 números o letras. Cuanto más larga, más segura (también protege tu llave de GitHub). No la compartas.</div>
+      <form id="pwChange" autocomplete="off">
+        <label class="a-field"><span>Contraseña actual</span><div class="pw-wrap"><input type="password" id="pwOld" autocomplete="current-password"><button type="button" class="pw-eye" data-eye="pwOld" aria-label="Mostrar"><i data-lucide="eye"></i></button></div></label>
+        <label class="a-field"><span>Contraseña nueva</span><div class="pw-wrap"><input type="password" id="pwNew" autocomplete="new-password"><button type="button" class="pw-eye" data-eye="pwNew" aria-label="Mostrar"><i data-lucide="eye"></i></button></div><small id="pwStrength"></small></label>
+        <label class="a-field"><span>Repetí la contraseña nueva</span><div class="pw-wrap"><input type="password" id="pwNew2" autocomplete="new-password"><button type="button" class="pw-eye" data-eye="pwNew2" aria-label="Mostrar"><i data-lucide="eye"></i></button></div></label>
+        <button type="submit" class="a-btn main"><i data-lucide="key-round"></i>Cambiar mi contraseña</button>
+      </form>
+    </div>
+
+    <!-- GUARDAR EN LA NUBE (GITHUB) -->
+    <div class="a-view" data-view="nube">
+      <button class="a-back" data-go="home"><i data-lucide="arrow-left"></i>Volver al menú</button>
+      <h3 class="a-title">Guardar en la nube</h3>
+      <div class="a-help"><i data-lucide="lightbulb"></i>Sin esto, tus cambios solo se ven en este equipo. Al conectar GitHub, cada cambio se publica y lo ve todo el mundo, desde cualquier celular o compu.</div>
+      <div class="a-status" id="ghStatus"><span class="dot"></span><span id="ghStatusText">Todavía no conectado</span></div>
+      <label class="a-field"><span>Usuario de GitHub</span><small>El dueño del repositorio. Ejemplo: carlakassburg</small><input id="ghOwner" autocapitalize="off" autocomplete="off" spellcheck="false"></label>
+      <label class="a-field"><span>Nombre del repositorio</span><small>Donde está guardada la página. Ejemplo: ck-interiorismo</small><input id="ghRepo" autocapitalize="off" autocomplete="off" spellcheck="false"></label>
+      <label class="a-field"><span>Rama</span><small>Casi siempre es “main”. Si no sabés, dejalo así.</small><input id="ghBranch" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="main"></label>
+      <label class="a-field"><span>Llave de GitHub (token)</span><small>Empieza con “github_pat_”. Se carga una sola vez: queda guardada cifrada con tu contraseña y funciona en todos tus equipos.</small>
+        <div class="pw-wrap"><input type="password" id="ghToken" autocomplete="off" spellcheck="false" placeholder="github_pat_…"><button type="button" class="pw-eye" data-eye="ghToken" aria-label="Mostrar"><i data-lucide="eye"></i></button></div></label>
+      <label class="a-check"><input type="checkbox" id="ghAuto" checked> Publicar automáticamente cada cambio</label>
+      <div style="display:grid;gap:10px">
+        <button class="a-btn main" id="ghSave"><i data-lucide="plug-zap"></i>Guardar y probar conexión</button>
+        <button class="a-btn soft" id="ghPublish"><i data-lucide="cloud-upload"></i>Publicar ahora para todos</button>
+        <button class="a-btn danger" id="ghForget"><i data-lucide="unplug"></i>Desconectar la nube</button>
+      </div>
+      <div class="a-sep"></div>
+      <b style="display:block;margin-bottom:8px">¿Cómo consigo la llave?</b>
+      <ol class="a-steps">
+        <li>Entrá a github.com → tu foto → <b>Settings</b> → <b>Developer settings</b>.</li>
+        <li><b>Personal access tokens</b> → <b>Fine-grained tokens</b> → <b>Generate new token</b>.</li>
+        <li>En “Repository access” elegí <b>solo el repositorio de tu página</b>.</li>
+        <li>En “Permissions” → <b>Contents</b>: <b>Read and write</b>.</li>
+        <li>Copiá la llave y pegala acá arriba.</li>
+      </ol>
+    </div>
+
     <!-- AYUDA -->
     <div class="a-view" data-view="ayuda">
       <button class="a-back" data-go="home"><i data-lucide="arrow-left"></i>Volver al menú</button>
@@ -1078,7 +1152,12 @@ const IM = p => IMG[p] || p;
    DATOS POR DEFECTO (lo que se ve la primera vez)
    ========================================================= */
 const STORE_KEY = 'ck-interiorismo-v1';
-const PIN = '1234';
+/* La contraseña nunca se guarda tal cual: solo su "huella" (hash SHA-256).
+   Contraseña inicial: se le entrega a Carla en privado y se cambia desde el panel. */
+const PW_SALT = 'ck-interiorismo|';
+const DEFAULT_PW_HASH = 'fb39ab615b84a6cacd7e7e85eae55ec2c9d01c06a7ecad9900ce608f3a5e5dee';
+const GH_TOKEN_KEY = 'ck-github-token', GH_LAST_KEY = 'ck-github-last';
+const DIRTY_KEY = 'ck-dirty';
 
 const CATS = {
   livings:     {label:'Livings',             icon:'sofa'},
@@ -1098,6 +1177,8 @@ const DEFAULTS = {
   texts:{
     heroTitle:'Hogares con *alma*, pensados para vos',
     heroSubtitle:'Diseño de interiores cálido y funcional. Te acompaño desde la primera idea hasta el último almohadón, para que tu casa se sienta como vos.',
+    nombre:'Carla Kassburg',
+    email:'',
     whatsapp:'5490000000000',
     instagram:'ck.interiorismo',
     zona:'Atención presencial y online',
@@ -1105,6 +1186,9 @@ const DEFAULTS = {
     aboutText:'Soy diseñadora de interiores y creo profundamente que los espacios cambian la forma en que vivimos.\n\nMe encanta escuchar, entender tu rutina y lo que te hace bien, para transformarlo en ambientes cálidos, prácticos y con identidad propia.\n\nTrabajo de manera cercana y personalizada: te explico cada decisión de forma simple, cuido tu presupuesto y te acompaño en todo el proceso. Porque una casa linda no es la que sale en una revista, sino la que te abraza cuando llegás.'
   },
   images:{hero:null, carla:null},
+  security:{pwHash:DEFAULT_PW_HASH, ghEnc:null},   // ghEnc: llave de GitHub cifrada con la contraseña
+  cloud:{owner:'', repo:'', branch:'main', auto:true},
+  updatedAt:0,
   projects:[
     {id:'p1', title:'Living con arcos y luz natural', cat:'livings', desc:'Arcadas, madera clara y mucho verde para un living que invita a quedarse.', img:'images/hero.jpg', featured:true},
     {id:'p2', title:'Living sereno en blanco', cat:'livings', desc:'Paleta neutra, texturas suaves y una alfombra que unifica todo el ambiente.', img:'images/p-living2.jpg', featured:false},
@@ -1153,30 +1237,50 @@ const BA_PAIRS = [
    ESTADO + GUARDADO (localStorage)
    ========================================================= */
 const clone = o => JSON.parse(JSON.stringify(o));
+/* Une datos guardados con los de fábrica (así nunca falta un campo) */
+function normalize(s){
+  const d = clone(DEFAULTS); s = s || {};
+  return {
+    theme: THEMES[s.theme] ? s.theme : d.theme,
+    texts: {...d.texts, ...(s.texts||{})},
+    images:{...d.images, ...(s.images||{})},
+    security:{...d.security, ...(s.security||{})},
+    cloud:{...d.cloud, ...(s.cloud||{})},
+    updatedAt: +s.updatedAt || 0,
+    projects: Array.isArray(s.projects) ? s.projects : d.projects,
+    testimonials: Array.isArray(s.testimonials) ? s.testimonials : d.testimonials
+  };
+}
 function load(){
-  try{
-    const raw = localStorage.getItem(STORE_KEY);
-    if(!raw) return clone(DEFAULTS);
-    const s = JSON.parse(raw), d = clone(DEFAULTS);
-    return {
-      theme: THEMES[s.theme] ? s.theme : d.theme,
-      texts: {...d.texts, ...(s.texts||{})},
-      images:{...d.images, ...(s.images||{})},
-      projects: Array.isArray(s.projects) ? s.projects : d.projects,
-      testimonials: Array.isArray(s.testimonials) ? s.testimonials : d.testimonials
-    };
-  }catch(e){ return clone(DEFAULTS); }
+  try{ const raw = localStorage.getItem(STORE_KEY); return raw ? normalize(JSON.parse(raw)) : clone(DEFAULTS); }
+  catch(e){ return clone(DEFAULTS); }
 }
 let state = load();
+const isDirty = () => { try{ return localStorage.getItem(DIRTY_KEY)==='1'; }catch(e){ return false; } };
+function setDirty(v){ try{ v ? localStorage.setItem(DIRTY_KEY,'1') : localStorage.removeItem(DIRTY_KEY); }catch(e){} updatePubPill(); }
 function save(silent){
+  state.updatedAt = Date.now();
   try{
     localStorage.setItem(STORE_KEY, JSON.stringify(state));
-    flashSaved();
+    setDirty(true); flashSaved(); schedulePublish();
     return true;
   }catch(e){
     toast('Uy, no se pudo guardar. Probá con una foto más liviana o borrá alguna que no uses.', true);
     return false;
   }
+}
+/* Al abrir la página: si hay datos publicados en la nube (data.json), se usan esos */
+async function loadRemote(){
+  try{
+    const r = await fetch('data.json?v=' + Date.now(), {cache:'no-store'});
+    if(!r.ok) return;
+    const remote = normalize(await r.json());
+    if(isDirty() && state.updatedAt > remote.updatedAt) return;  // Carla tiene cambios nuevos sin publicar
+    state = remote;
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
+    setDirty(false); renderAll(false);
+    if($('#admin').classList.contains('open')) fillAdmin();
+  }catch(e){ /* sin nube: se usa lo local */ }
 }
 
 /* =========================================================
@@ -1279,6 +1383,13 @@ function renderTexts(animate){
   $('#fab').href = waLink(general); $('#footWa').href = waLink(general);
   $('#footWaText').textContent = 'WhatsApp · +' + waNumber();
   $('#footZone').textContent = t.zona;
+  const nombre = (t.nombre||'').trim() || 'Carla Kassburg', first = nombre.split(/\s+/)[0];
+  $('#brandName').textContent = nombre; $('#footName').textContent = nombre;
+  $('#signature').textContent = first; $('#carlaPhoto').alt = nombre;
+  $('#aHello').textContent = `¡Hola ${first}! 👋`; $('#pwHello').textContent = `¡Hola ${first}!`;
+  const mail = (t.email||'').trim();
+  $('#footMailLi').style.display = mail ? '' : 'none';
+  $('#footMail').href = 'mailto:' + mail; $('#footMailText').textContent = mail;
   $('#carlaPhoto').src = IM(state.images.carla || 'images/carla.jpg');
   $$('[data-srv]').forEach(a => { const s = SERVICES.find(x=>x.key===a.dataset.srv); a.href = waLink(s.msg); });
 }
@@ -1530,33 +1641,71 @@ setTimeout(()=>{ fab.classList.add('tip'); setTimeout(()=>fab.classList.remove('
 /* =========================================================
    PANEL DE CARLA
    ========================================================= */
-let pin = '';
+/* SHA-256 propio (funciona aunque el archivo se abra sin servidor) */
+function sha256(str){
+  str = unescape(encodeURIComponent(str));
+  const K=[], H=[]; let cand=2, n=0;
+  const frac = x => ((x - Math.floor(x)) * 4294967296) | 0;
+  while(n<64){ let prime=true; for(let f=2; f*f<=cand; f++) if(cand%f===0){ prime=false; break; }
+    if(prime){ if(n<8) H[n]=frac(Math.pow(cand,1/2)); K[n++]=frac(Math.pow(cand,1/3)); } cand++; }
+  const bits = str.length*8; str += '\x80'; while(str.length % 64 - 56) str += '\x00';
+  const w0 = []; for(let i=0;i<str.length;i++) w0[i>>2] |= str.charCodeAt(i) << ((3 - i%4) * 8);
+  w0.push((bits / 4294967296) | 0, bits | 0);
+  const rot = (v,a) => (v>>>a) | (v<<(32-a));
+  for(let j=0; j<w0.length; j+=16){
+    const w = w0.slice(j, j+16), h = H.slice(0);
+    for(let i=0;i<64;i++){
+      if(i>=16){ const a=w[i-15], b=w[i-2];
+        w[i] = (w[i-16] + (rot(a,7)^rot(a,18)^(a>>>3)) + w[i-7] + (rot(b,17)^rot(b,19)^(b>>>10))) | 0; }
+      const e=h[4], a=h[0];
+      const t1 = (h[7] + (rot(e,6)^rot(e,11)^rot(e,25)) + ((e&h[5])^(~e&h[6])) + K[i] + w[i]) | 0;
+      const t2 = ((rot(a,2)^rot(a,13)^rot(a,22)) + ((a&h[1])^(a&h[2])^(h[1]&h[2]))) | 0;
+      h.pop(); h.unshift((t1+t2)|0); h[4] = (h[4]+t1)|0;
+    }
+    for(let i=0;i<8;i++) H[i] = (H[i]+h[i]) | 0;
+  }
+  return H.map(x => (x>>>0).toString(16).padStart(8,'0')).join('');
+}
+const hashPw = pw => sha256(PW_SALT + pw);
+const usingDefaultPw = () => state.security.pwHash === DEFAULT_PW_HASH;
+
 const isLogged = () => { try{ return sessionStorage.getItem('ck-auth')==='1'; }catch(e){ return false; } };
 function openPin(){
   if(isLogged()) return openAdmin();
-  pin = ''; drawPin(); $('#pinModal').classList.add('open');
+  $('#pwInput').value = ''; $('#pinModal').classList.add('open');
+  setTimeout(()=>$('#pwInput').focus(), 300);
 }
-function drawPin(){ $$('#pinDots span').forEach((d,i)=>d.classList.toggle('f', i<pin.length)); }
-$('#pinPad').innerHTML = ['1','2','3','4','5','6','7','8','9','','0','⌫'].map(k=> k ? `<button data-k="${k}" aria-label="${k==='⌫'?'Borrar':k}">${k}</button>` : '<span></span>').join('');
-function pinKey(k){
-  if(k==='⌫'){ pin = pin.slice(0,-1); drawPin(); return; }
-  if(pin.length>=4) return;
-  pin += k; drawPin();
-  if(pin.length===4){
-    setTimeout(()=>{
-      if(pin===PIN){
-        try{ sessionStorage.setItem('ck-auth','1'); }catch(e){}
-        $('#pinModal').classList.remove('open'); openAdmin(); toast('¡Bienvenida, Carla! Ya podés editar tu página.');
-      } else {
-        const c = $('#pinCard'); c.classList.remove('shake'); void c.offsetWidth; c.classList.add('shake');
-        pin=''; drawPin(); toast('Esa clave no es correcta, probá de nuevo', true);
-      }
-    }, 250);
+/* Frena a quien intenta adivinar: después de 5 errores, espera 1 minuto */
+function lockInfo(){ try{ return JSON.parse(sessionStorage.getItem('ck-lock')||'{"n":0,"until":0}'); }catch(e){ return {n:0,until:0}; } }
+function setLock(o){ try{ sessionStorage.setItem('ck-lock', JSON.stringify(o)); }catch(e){} }
+$('#pwForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const lk = lockInfo();
+  if(Date.now() < lk.until){ toast(`Por seguridad, esperá ${Math.ceil((lk.until-Date.now())/1000)} segundos y probá de nuevo`, true); return; }
+  const pw = $('#pwInput').value;
+  if(!pw){ $('#pwInput').focus(); return; }
+  if(hashPw(pw) === state.security.pwHash){
+    setLock({n:0,until:0});
+    try{ sessionStorage.setItem('ck-auth','1'); }catch(e){}
+    sessPw(pw);
+    $('#pinModal').classList.remove('open'); $('#pwInput').value='';
+    unlockToken(pw).then(()=>{ if($('#admin').classList.contains('open')) fillAdmin(); });
+    openAdmin();
+    toast(`¡Bienvenida, ${(state.texts.nombre||'Carla').split(' ')[0]}! Ya podés editar tu página.`);
+  } else {
+    lk.n++; if(lk.n >= 5){ lk.until = Date.now() + 60000; lk.n = 0; }
+    setLock(lk);
+    const c = $('#pinCard'); c.classList.remove('shake'); void c.offsetWidth; c.classList.add('shake');
+    $('#pwInput').select();
+    toast('Esa contraseña no es correcta, probá de nuevo', true);
   }
-}
-$('#pinPad').addEventListener('click', e=>{ const b=e.target.closest('[data-k]'); if(b) pinKey(b.dataset.k); });
-document.addEventListener('keydown', e=>{ if(!$('#pinModal').classList.contains('open')) return;
-  if(/^\d$/.test(e.key)) pinKey(e.key); if(e.key==='Backspace') pinKey('⌫'); if(e.key==='Escape') $('#pinModal').classList.remove('open'); });
+});
+document.addEventListener('click', e=>{
+  const b = e.target.closest('[data-eye]'); if(!b) return;
+  const inp = document.getElementById(b.dataset.eye); const show = inp.type === 'password';
+  inp.type = show ? 'text' : 'password'; b.innerHTML = `<i data-lucide="${show?'eye-off':'eye'}"></i>`; icons();
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('#pinModal').classList.contains('open')) $('#pinModal').classList.remove('open'); });
 $('#pinCancel').onclick = ()=> $('#pinModal').classList.remove('open');
 $('#carlaAccess').onclick = openPin;
 if(location.hash === '#carla') setTimeout(openPin, 2600);
@@ -1585,7 +1734,13 @@ function fillAdmin(){
   // Fotos
   $('#prev-hero img').src = heroSrc();
   $('#prev-carla img').src = IM(state.images.carla || 'images/carla.jpg');
-  renderPList(); renderTList(); icons();
+  renderPList(); renderTList(); fillGitHub(); renderWarns(); icons();
+}
+function renderWarns(){
+  let h = '';
+  if(waNumber()==='5490000000000' || waNumber().length < 10) h += `<div class="a-warn"><i data-lucide="phone"></i><div><b>Falta tu WhatsApp real.</b> Así te llegan las consultas.<button data-go="datos">Cargar mi número</button></div></div>`;
+  if(!ghConfigured()) h += `<div class="a-warn" style="background:#EEF3EA;border-color:#D3E0CA;color:#45603a"><i data-lucide="cloud" style="color:#6FA15A"></i><div><b>Tus cambios solo se ven en este equipo.</b> Conectá la nube para que los vea todo el mundo.<button data-go="nube" style="color:#5E7F4E">Conectar la nube</button></div></div>`;
+  $('#homeWarns').innerHTML = h; icons();
 }
 
 // Cambiar estilo
@@ -1606,6 +1761,170 @@ $$('[data-text]').forEach(inp=>{
   });
 });
 $('#saveTexts').onclick = ()=>{ if(save()) toast('¡Listo Carla! Tus cambios ya se ven en la página'); };
+$('#saveDatos').onclick = ()=>{
+  const n = waNumber();
+  if(n.length < 10){ toast('Revisá tu WhatsApp: tiene que tener código de país y área, sin espacios', true); return; }
+  if(save()){ renderWarns(); toast('¡Listo! Tus datos ya se ven en la página'); }
+};
+
+/* Cambio de contraseña */
+$('#pwNew').addEventListener('input', e=>{
+  const v = e.target.value; let sc = 0;
+  if(v.length>=8) sc++; if(v.length>=12) sc++; if(/[A-Z]/.test(v) && /[a-z]/.test(v)) sc++; if(/\d/.test(v)) sc++; if(/[^A-Za-z0-9]/.test(v)) sc++;
+  const lbl = !v ? '' : v.length < 4 ? '⚠️ Muy corta: usá por lo menos 4' : sc<=2 ? '🙂 Aceptable' : sc<=3 ? '👍 Buena' : '💪 ¡Muy segura!';
+  $('#pwStrength').textContent = lbl;
+});
+$('#pwChange').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const o=$('#pwOld').value, n=$('#pwNew').value, n2=$('#pwNew2').value;
+  if(hashPw(o) !== state.security.pwHash){ toast('La contraseña actual no es correcta', true); $('#pwOld').focus(); return; }
+  if(n.length < 4){ toast('La nueva tiene que tener por lo menos 4 números o letras', true); $('#pwNew').focus(); return; }
+  if(n !== n2){ toast('Las dos contraseñas nuevas no coinciden', true); $('#pwNew2').focus(); return; }
+  state.security.pwHash = hashPw(n);
+  sessPw(n);
+  const tok = localToken();
+  if(tok){ try{ state.security.ghEnc = await encryptToken(tok, n); }catch(err){} }
+  if(save()){
+    ['#pwOld','#pwNew','#pwNew2'].forEach(x=>$(x).value=''); $('#pwStrength').textContent='';
+    renderWarns();
+    toast(ghConfigured() ? '¡Contraseña cambiada! Ya vale en todos tus equipos.' : '¡Contraseña cambiada! Conectá la nube para que valga en todos tus equipos.');
+  }
+});
+
+/* =========================================================
+   NUBE: GITHUB (guarda data.json y las fotos en tu repositorio)
+   ========================================================= */
+/* La llave se guarda CIFRADA con la contraseña dentro de data.json.
+   Así se carga una sola vez y, en cualquier equipo, al entrar con la contraseña se destraba sola. */
+const sessPw = v => { try{ if(v===undefined) return sessionStorage.getItem('ck-pw')||''; sessionStorage.setItem('ck-pw', v); }catch(e){ return ''; } };
+const localToken = () => { try{ return localStorage.getItem(GH_TOKEN_KEY)||''; }catch(e){ return ''; } };
+const setLocalToken = t => { try{ t ? localStorage.setItem(GH_TOKEN_KEY, t) : localStorage.removeItem(GH_TOKEN_KEY); }catch(e){} };
+const toB64 = buf => btoa(String.fromCharCode(...new Uint8Array(buf)));
+const fromB64 = str => Uint8Array.from(atob(str), c => c.charCodeAt(0));
+async function pwKey(pw, salt){
+  if(!(window.crypto && crypto.subtle)) throw new Error('nocrypto');
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:600000, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']);
+}
+async function encryptToken(token, pw){
+  const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
+  const data = await crypto.subtle.encrypt({name:'AES-GCM', iv}, await pwKey(pw, salt), new TextEncoder().encode(token));
+  return {v:1, salt:toB64(salt), iv:toB64(iv), data:toB64(data)};
+}
+async function decryptToken(enc, pw){
+  const out = await crypto.subtle.decrypt({name:'AES-GCM', iv:fromB64(enc.iv)}, await pwKey(pw, fromB64(enc.salt)), fromB64(enc.data));
+  return new TextDecoder().decode(out);
+}
+async function unlockToken(pw){
+  const enc = state.security.ghEnc; if(!enc || !pw) return;
+  try{ const t = await decryptToken(enc, pw); if(t && t !== localToken()){ setLocalToken(t); updatePubPill(); renderWarns(); } }catch(e){}
+}
+function ghCfg(){ const c = state.cloud || {}; return {owner:c.owner, repo:c.repo, branch:c.branch||'main', auto:c.auto!==false, token:localToken()}; }
+const ghLast = () => { try{ return +localStorage.getItem(GH_LAST_KEY)||0; }catch(e){ return 0; } };
+const ghConfigured = () => { const c = ghCfg(); return !!(c.owner && c.repo && c.token); };
+function ghStatus(kind, text){ const b=$('#ghStatus'); b.className = 'a-status' + (kind?' '+kind:''); $('#ghStatusText').textContent = text; }
+function fillGitHub(){
+  const c = ghCfg(), last = ghLast();
+  $('#ghOwner').value = c.owner||''; $('#ghRepo').value = c.repo||''; $('#ghBranch').value = c.branch||'main';
+  $('#ghToken').value = c.token||''; $('#ghAuto').checked = c.auto;
+  if(ghConfigured()) ghStatus('ok', last ? `Conectado · último publicado: ${new Date(last).toLocaleString('es-AR',{dateStyle:'short',timeStyle:'short'})}` : 'Conectado ✓');
+  else if(state.security.ghEnc) ghStatus('', 'La llave ya está guardada. Volvé a entrar con tu contraseña para activarla en este equipo.');
+  else ghStatus('', 'Todavía no conectado');
+  updatePubPill();
+}
+function updatePubPill(){ const p = $('#pubPill'); if(p) p.classList.toggle('show', isDirty() && ghConfigured()); }
+
+async function gh(path, opts={}){
+  const c = ghCfg();
+  let r;
+  try{
+    r = await fetch(`https://api.github.com/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}${path}`, {
+      ...opts, headers:{'Authorization':`Bearer ${c.token}`,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28', ...(opts.body?{'Content-Type':'application/json'}:{})}
+    });
+  }catch(e){ const err = new Error('net'); err.code = 0; throw err; }
+  if(!r.ok){ const err = new Error('http ' + r.status); err.code = r.status; throw err; }
+  return r.status === 204 ? null : r.json();
+}
+function ghErrorText(e){
+  if(e.message === 'nocrypto') return 'Para conectar la nube abrí la página ya publicada en internet (no el archivo suelto).';
+  if(e.code === 401) return 'La llave de GitHub no es válida o venció. Cargá una nueva.';
+  if(e.code === 403) return 'La llave no tiene permiso para escribir. Revisá que tenga “Contents: Read and write”.';
+  if(e.code === 404) return 'No encuentro ese repositorio. Revisá el usuario y el nombre (o que la llave tenga acceso a él).';
+  if(e.code === 409 || e.code === 422) return 'GitHub estaba ocupado con otro cambio. Probá publicar de nuevo.';
+  if(e.code === 0) return 'No me pude conectar con GitHub. Revisá internet (desde la vista previa de Claude no se puede: usá la página publicada).';
+  return 'GitHub respondió con un error (' + e.code + '). Probá de nuevo en un rato.';
+}
+const b64utf8 = str => btoa(unescape(encodeURIComponent(str)));
+async function ghPutFile(path, base64, message){
+  const c = ghCfg(), ref = encodeURIComponent(c.branch);
+  let sha;
+  try{ sha = (await gh(`/contents/${path}?ref=${ref}`)).sha; }catch(e){ if(e.code !== 404) throw e; }
+  return gh(`/contents/${path}`, {method:'PUT', body:JSON.stringify({message, content:base64, branch:c.branch, ...(sha?{sha}:{})})});
+}
+let publishing = false, publishAgain = false, pubTimer;
+function schedulePublish(){
+  if(!ghConfigured() || !ghCfg().auto) return;
+  clearTimeout(pubTimer); pubTimer = setTimeout(()=>publish(true), 2500);
+}
+async function publish(auto){
+  if(!ghConfigured()){ if(!auto) toast('Primero conectá GitHub en “Guardar en la nube”', true); return; }
+  if(publishing){ publishAgain = true; return; }
+  publishing = true; ghStatus('', 'Publicando…');
+  const c = ghCfg();
+  try{
+    // 1) Las fotos subidas desde el equipo se guardan como archivos en el repositorio
+    const rawBase = `https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/`;
+    const slots = [];
+    state.projects.forEach(p => { if(String(p.img).startsWith('data:')) slots.push({get:()=>p.img, set:v=>p.img=v, id:p.id}); });
+    ['hero','carla'].forEach(k => { if(String(state.images[k]||'').startsWith('data:')) slots.push({get:()=>state.images[k], set:v=>state.images[k]=v, id:k+'-'+Date.now().toString(36)}); });
+    for(const sl of slots){
+      const path = `images/subidas/${sl.id}.jpg`;
+      await ghPutFile(path, sl.get().split(',')[1], 'Foto nueva desde el panel de Carla');
+      sl.set(rawBase + path);
+    }
+    // 2) Todo el contenido de la página (con la llave cifrada) va a data.json
+    await ghPutFile('data.json', b64utf8(JSON.stringify(state, null, 1)), 'Cambios desde el panel de Carla');
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); localStorage.setItem(GH_LAST_KEY, Date.now()); }catch(e){}
+    setDirty(false); fillGitHub();
+    toast('¡Publicado! En uno o dos minutos lo ve todo el mundo 🌎');
+  }catch(e){
+    ghStatus('err', ghErrorText(e)); toast(ghErrorText(e), true);
+  }finally{
+    publishing = false;
+    if(publishAgain){ publishAgain = false; publish(true); }
+  }
+}
+$('#ghSave').onclick = async ()=>{
+  const cloud = {owner:$('#ghOwner').value.trim().replace(/^@/,''), repo:$('#ghRepo').value.trim(), branch:$('#ghBranch').value.trim()||'main', auto:$('#ghAuto').checked};
+  const token = $('#ghToken').value.trim(), pw = sessPw();
+  if(!cloud.owner || !cloud.repo || !token){ toast('Completá usuario, repositorio y llave', true); return; }
+  if(!pw){ toast('Por seguridad, cerrá el panel y volvé a entrar con tu contraseña', true); return; }
+  const prevCloud = state.cloud, prevTok = localToken();
+  state.cloud = cloud; setLocalToken(token); ghStatus('', 'Probando conexión…');
+  try{
+    const info = await gh('');
+    if(info.permissions && !info.permissions.push) throw Object.assign(new Error('x'),{code:403});
+    state.security.ghEnc = await encryptToken(token, pw);     // queda guardada (cifrada) para todos los equipos
+    save(); renderWarns();
+    ghStatus('ok', '¡Conectado! ✓');
+    toast('¡Listo! La llave quedó guardada: en cualquier equipo entrás con tu contraseña y funciona.');
+    publish(true);
+  }catch(e){
+    state.cloud = prevCloud; setLocalToken(prevTok);
+    ghStatus('err', ghErrorText(e)); toast(ghErrorText(e), true);
+  }
+};
+$('#ghAuto').onchange = ()=>{ state.cloud = {...state.cloud, auto:$('#ghAuto').checked}; save(); };
+$('#ghPublish').onclick = ()=>publish(false);
+$('#pubPill').onclick = ()=>publish(false);
+$('#ghForget').onclick = async ()=>{
+  if(await askConfirm('¿Desconectar la nube?', 'Se borra la llave guardada, en todos tus equipos. Tu página publicada no se borra.', 'Sí, desconectar')){
+    state.security.ghEnc = null;
+    if(ghConfigured()){ clearTimeout(pubTimer); await publish(false); }
+    setLocalToken(''); fillGitHub(); renderWarns(); toast('Listo, la nube quedó desconectada');
+  }
+};
+
 
 // Fotos principales
 $$('[data-main-img]').forEach(inp=>{
@@ -1724,17 +2043,18 @@ $('#tList').addEventListener('click', async e=>{
 // Ayuda
 $('#resetAll').onclick = async ()=>{
   if(await askConfirm('¿Volver todo al principio?', 'Se borran tus textos, fotos y proyectos nuevos, y la página queda como el primer día.', 'Sí, restaurar')){
-    state = clone(DEFAULTS); try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+    const keepPw = state.security; state = clone(DEFAULTS); state.security = keepPw; save();
     filter='all'; renderAll(false); fillAdmin(); toast('Listo, la página volvió a su versión original');
   }
 };
-$('#logout').onclick = ()=>{ try{ sessionStorage.removeItem('ck-auth'); }catch(e){} $('#admin').classList.remove('open'); toast('¡Hasta pronto, Carla! Tu panel quedó cerrado.'); };
+$('#logout').onclick = ()=>{ try{ sessionStorage.removeItem('ck-auth'); sessionStorage.removeItem('ck-pw'); }catch(e){} $('#admin').classList.remove('open'); toast('¡Hasta pronto, Carla! Tu panel quedó cerrado.'); };
 
 /* =========================================================
    ARRANQUE
    ========================================================= */
 $('#year').textContent = new Date().getFullYear();
-renderServices(); renderBA(); renderAll(true); qShow(); observe(); onScroll();
+renderServices(); renderBA(); renderAll(true); qShow(); observe(); onScroll(); updatePubPill();
+loadRemote();
 setTimeout(()=>$('#intro').classList.add('done'), 1900);
 setTimeout(()=>$('#intro').remove(), 3400);
 </script>
