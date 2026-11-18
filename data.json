@@ -1,0 +1,155 @@
+{
+ "theme": "arena",
+ "texts": {
+  "heroTitle": "Hogares con *alma*, pensados para vos",
+  "heroSubtitle": "Diseño de interiores cálido y funcional. Te acompaño desde la primera idea hasta el último almohadón, para que tu casa se sienta como vos.",
+  "nombre": "Carla Kassburg",
+  "email": "",
+  "whatsapp": "5490000000000",
+  "instagram": "ck.interiorismo",
+  "zona": "Atención presencial y online",
+  "aboutTitle": "Hola, soy *Carla*",
+  "aboutText": "Soy diseñadora de interiores y creo profundamente que los espacios cambian la forma en que vivimos.\n\nMe encanta escuchar, entender tu rutina y lo que te hace bien, para transformarlo en ambientes cálidos, prácticos y con identidad propia.\n\nTrabajo de manera cercana y personalizada: te explico cada decisión de forma simple, cuido tu presupuesto y te acompaño en todo el proceso. Porque una casa linda no es la que sale en una revista, sino la que te abraza cuando llegás."
+ },
+ "images": {
+  "hero": null,
+  "carla": null
+ },
+ "security": {
+  "pwHash": "d6d22693aeb3e6f6a299444c1446846aecb105672927fa63526b046bb85cbcea",
+  "ghEnc": {
+   "v": 1,
+   "salt": "60jArZ5ibmljqcptUqIG1A==",
+   "iv": "KZhsPrOrgOj2X5gU",
+   "data": "EqrIVCZKDSihAMqoo/FSb8LDOTwasVvDdGRUoUVoSDg5ArbDOKakl+dkeBYmLfRqwdf8xFac2kylYipzVfXW7ydZ0nL0GUGhRgcV2hZVVX0DMY6qY0VM92kDBcH4wWvCmKL39DPr2oWNyClhTQ=="
+  }
+ },
+ "cloud": {
+  "owner": "interiorismock-ui",
+  "repo": "int",
+  "branch": "main",
+  "auto": true
+ },
+ "updatedAt": 1795020986857,
+ "projects": [
+  {
+   "id": "xmwmca4nzoabq",
+   "title": "rrr",
+   "cat": "livings",
+   "desc": "rrrr",
+   "img": "https://raw.githubusercontent.com/interiorismock-ui/int/main/images/subidas/xmwmca4nzoabq.jpg",
+   "featured": false
+  },
+  {
+   "id": "p1",
+   "title": "Living con arcos y luz natural",
+   "cat": "livings",
+   "desc": "Arcadas, madera clara y mucho verde para un living que invita a quedarse.",
+   "img": "images/hero.jpg",
+   "featured": true
+  },
+  {
+   "id": "p2",
+   "title": "Living sereno en blanco",
+   "cat": "livings",
+   "desc": "Paleta neutra, texturas suaves y una alfombra que unifica todo el ambiente.",
+   "img": "images/p-living2.jpg",
+   "featured": false
+  },
+  {
+   "id": "p3",
+   "title": "Dormitorio en tonos piedra",
+   "cat": "dormitorios",
+   "desc": "Cabecero amplio, luz cálida y textiles naturales para descansar de verdad.",
+   "img": "images/p-dorm1.jpg",
+   "featured": true
+  },
+  {
+   "id": "p4",
+   "title": "Cocina luminosa",
+   "cat": "cocinas",
+   "desc": "Mesada clara, luminarias protagonistas y orden pensado para el día a día.",
+   "img": "images/p-cocina1.jpg",
+   "featured": false
+  },
+  {
+   "id": "p5",
+   "title": "Showroom de diseño",
+   "cat": "locales",
+   "desc": "Un local que muestra el producto como protagonista, con luz y materiales nobles.",
+   "img": "images/p-local1.jpg",
+   "featured": false
+  },
+  {
+   "id": "p6",
+   "title": "Rincón de lectura",
+   "cat": "livings",
+   "desc": "Un sillón con carácter y una pared de color: pequeños cambios, gran impacto.",
+   "img": "images/p-living1.jpg",
+   "featured": false
+  },
+  {
+   "id": "p7",
+   "title": "Comedor familiar",
+   "cat": "cocinas",
+   "desc": "Una mesa para encontrarse, sillas livianas y una lámpara que da calidez.",
+   "img": "images/p-comedor1.jpg",
+   "featured": false
+  },
+  {
+   "id": "p8",
+   "title": "Suite en grises cálidos",
+   "cat": "dormitorios",
+   "desc": "Capas de textiles y una iluminación suave para un dormitorio de hotel en casa.",
+   "img": "images/p-dorm2.jpg",
+   "featured": false
+  },
+  {
+   "id": "p9",
+   "title": "Local con identidad",
+   "cat": "locales",
+   "desc": "Mobiliario sencillo, una planta como acento y foco en la experiencia del cliente.",
+   "img": "images/p-local2.jpg",
+   "featured": false
+  },
+  {
+   "id": "p10",
+   "title": "Dormitorio con vista",
+   "cat": "dormitorios",
+   "desc": "Madera, blanco y luz: un espacio simple que se disfruta todos los días.",
+   "img": "images/p-dorm3.jpg",
+   "featured": false
+  },
+  {
+   "id": "p11",
+   "title": "Living con color",
+   "cat": "livings",
+   "desc": "Arte, almohadones con color y un sillón cómodo para toda la familia.",
+   "img": "images/p-living3.jpg",
+   "featured": false
+  }
+ ],
+ "testimonials": [
+  {
+   "id": "t1",
+   "name": "María L.",
+   "place": "Living y comedor",
+   "text": "Carla entendió enseguida lo que quería, aunque ni yo sabía explicarlo. Hoy mi casa se siente mía de verdad.",
+   "demo": true
+  },
+  {
+   "id": "t2",
+   "name": "Jorge y Ana",
+   "place": "Remodelación de cocina",
+   "text": "Nos acompañó en cada paso y nos ayudó a cuidar el presupuesto. ¡El resultado superó lo que imaginábamos!",
+   "demo": true
+  },
+  {
+   "id": "t3",
+   "name": "Sofía R.",
+   "place": "Asesoría online",
+   "text": "Con la asesoría online renové mi dormitorio sin obra. Súper clara, cálida y con ideas que pude aplicar enseguida.",
+   "demo": true
+  }
+ ]
+}
