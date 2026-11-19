@@ -19,9 +19,9 @@
   "pwHash": "d6d22693aeb3e6f6a299444c1446846aecb105672927fa63526b046bb85cbcea",
   "ghEnc": {
    "v": 1,
-   "salt": "60jArZ5ibmljqcptUqIG1A==",
-   "iv": "KZhsPrOrgOj2X5gU",
-   "data": "EqrIVCZKDSihAMqoo/FSb8LDOTwasVvDdGRUoUVoSDg5ArbDOKakl+dkeBYmLfRqwdf8xFac2kylYipzVfXW7ydZ0nL0GUGhRgcV2hZVVX0DMY6qY0VM92kDBcH4wWvCmKL39DPr2oWNyClhTQ=="
+   "salt": "RfOfUNn7McQCncEQLLQaMA==",
+   "iv": "UQ3qRm28vXlcEd6o",
+   "data": "oyTsCSM4L1gehuh0VZjBjndkT9U84KnoTqA6fWj1R0V+MUNVTmJNfLinusHSGE9Ub9s9Eh6w5aSYxra42T8eSF2m8WgW66FMfK8XZFXev6kwUUwx4riNZsM4mElnBX5K4G8a/MIbBLhq1r6TTQ=="
   }
  },
  "cloud": {
@@ -30,16 +30,8 @@
   "branch": "main",
   "auto": true
  },
- "updatedAt": 1795101463239,
+ "updatedAt": 1795101501043,
  "projects": [
-  {
-   "id": "xmwmca4nzoabq",
-   "title": "rrr",
-   "cat": "livings",
-   "desc": "rrrr",
-   "img": "https://raw.githubusercontent.com/interiorismock-ui/int/main/images/subidas/xmwmca4nzoabq.jpg",
-   "featured": false
-  },
   {
    "id": "p1",
    "title": "Living con arcos y luz natural",
